@@ -1,45 +1,46 @@
-class Rain{
+class Rain {
   PVector location;
   PVector velocity;
   PVector acceleration;
   float topspeed;
-  
-  
-  Rain(PVector loc){
-   
-    location = loc;
-    velocity = new PVector(0,0);
-    acceleration = new PVector(0,0);
+  float mass;
 
-    topspeed = 1;
+
+  Rain(PVector loc, float m) {
+    mass = m;
+    location = loc;
+    velocity = new PVector(0, 0);
+    acceleration = new PVector(0, 0);
+
+    topspeed = 5;
   }
-  
-  void applyForce(PVector force){
-    acceleration.add(force);
+
+  void applyForce(PVector force) {
+    PVector f = PVector.div(force, mass);
+    acceleration.add(f);
   }
-  
-  void update(){
-    
-    //PVector mouse = new PVector(mouseX,mouseY);
-    //PVector dir = PVector.sub(mouse, location);
-    
-    //acceleration = dir;
-    //acceleration.add(dir);
-    
+
+  void update() {
     velocity.add(acceleration);
     acceleration.random2D();
     velocity.limit(topspeed);
     location.add(velocity); 
     acceleration.mult(0);
+
+    //PVector mouse = new PVector(mouseX,mouseY);
+    //PVector dir = PVector.sub(mouse, location);
+
+    //acceleration = dir;
+    //acceleration.add(dir);
   }
-  
-  void display(){
+
+  void display() {
     noStroke();
-    fill(32,184,242,200);
-    rect(location.x,location.y,2,12);
+    fill(32, 184, 242, 50);
+    rect(location.x, location.y, mass*2, mass*10);
   }
-  
-   void checkEdges() {
+
+  void checkEdges() {
 
     if (location.x > width) {
       location.x = 0;
@@ -56,3 +57,4 @@ class Rain{
     }
   }
 }
+
