@@ -22,7 +22,7 @@ class Rain {
 
   void update() {
     velocity.add(acceleration);
-    acceleration.random2D();
+    //acceleration.random2D();
     velocity.limit(topspeed);
     location.add(velocity); 
     acceleration.mult(0);
@@ -36,8 +36,9 @@ class Rain {
 
   void display() {
     noStroke();
-    fill(32, 184, 242, 50);
+    fill(32, 184, 242, 200);
     rect(location.x, location.y, mass*2, mass*10);
+    //rect(location.x, location.y, 2, 12);
   }
 
   void checkEdges() {
